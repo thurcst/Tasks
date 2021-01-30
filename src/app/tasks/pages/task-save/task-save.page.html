@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tasks"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{pageTitle}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="taskForm" (submit)="onSubmit()">
+    <ion-item>
+      <ion-icon name="document" slot="start" color="primary"></ion-icon>
+      <ion-input
+        type="text"
+        placeholder="Title"
+        inputmode="text"
+        formControlName="title"
+      >
+      </ion-input>
+      <ion-toggle
+        *ngIf="taskId"
+        slot="end"
+        color="primary"
+        formControlName="done"
+      >
+      </ion-toggle>
+    </ion-item>
+    <ion-button
+      [disabled]="taskForm.invalid"
+      expand="full"
+      type="submit"
+      [color]="success() ? 'success' : 'primary'"
+      mode="ios"
+      (click)="sending = true"
+    >
+      <p *ngIf="!success()">Save</p>
+      <ion-spinner *ngIf="sending" name="dots"></ion-spinner>
+      <ion-icon *ngIf="success()" name="checkmark-done-outline"></ion-icon>
+    </ion-button>
+    <ion-button
+      *ngIf="taskId"
+      expand="full"
+      (click)="delete(taskForm.value)"
+      color="danger"
+      mode="ios"
+    >
+      <p *ngIf="!success()">Delete</p>
+      <ion-spinner *ngIf="sending" name="dots"></ion-spinner>
+      <ion-icon *ngIf="success()" name="trash-outline"></ion-icon>
+    </ion-button>
+  </form>
+</ion-content>

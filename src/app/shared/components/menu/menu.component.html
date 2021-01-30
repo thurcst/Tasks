@@ -1,0 +1,27 @@
+<ion-menu menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar color="light">
+      <ion-title>Abas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-list-header *ngIf="user">
+        {{ user.displayName }}
+      </ion-list-header>
+      <ion-menu-toggle autoHide="false">
+        <ion-item
+          *ngFor="let page of pages"
+          [routerLink]="page.url"
+          [routerDirection]="page.direction"
+        >
+          <ion-icon [name]="page.icon" slot="start"></ion-icon>
+          <ion-label>
+            {{ page.text }}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
